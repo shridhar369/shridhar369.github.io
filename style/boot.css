@@ -7,6 +7,11 @@
     white-space: pre-wrap;
 }
 
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50%       { opacity: 0; }
+}
+
 /* Reset and Base Font */
 * {
     box-sizing: border-box;
@@ -28,7 +33,7 @@ body {
     width: 100vw;
     position: relative;
     padding: 10px;
-    background-image: url('assets/im_op.gif');
+    background-image: url('../assets/backroom.jpg');
     background-size: cover;
     background-position: center;
 }
@@ -52,7 +57,7 @@ body {
 .icon-img {
     font-size: 32px;
     margin-bottom: 5px;
-    text-shadow: 2px 2px 0px rgba(0,0,0,0.5);
+    text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.5);
 }
 
 .icon-label {
@@ -137,6 +142,23 @@ body {
     cursor: pointer;
     max-width: 150px;
     overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    flex-shrink: 1;
+}
+
+.task-tab:hover {
+    background-color: #e0e0e0;
+}
+
+.task-tab.minimized-tab {
+    color: #555;
+    font-style: italic;
+}
+
+.task-tab:focus {
+    outline: 2px solid #000080;
+    outline-offset: -2px;
 }
 
 .task-tab.active-tab {
@@ -165,6 +187,15 @@ body {
     padding: 5px 15px;
     cursor: pointer;
     font-family: inherit;
+    transition: all 0.1s;
+}
+
+.retro-btn:hover {
+    background-color: #e0e0e0;
+}
+
+.retro-btn:focus {
+    outline: 1px dotted #000080;
 }
 
 .retro-btn:active {
@@ -182,26 +213,49 @@ body {
     padding: 0 5px;
     position: fixed;
     bottom: 0;
-    width: 100%;
+    left: 0;
+    right: 0;
     z-index: 1000;
 }
 
-.start-btn {
+/* Taskbar tabs container: stretch to fill space between shutdown and clock */
+#taskbar-tabs {
+    display: flex;
+    gap: 5px;
+    flex: 1 1 auto;
+    margin: 0 8px;
+    align-items: center;
+}
+
+.shutdown-btn {
     display: flex;
     align-items: center;
-    gap: 5px;
+    gap: 6px;
     font-weight: bold;
-    padding: 5px 10px;
+    padding: 6px 12px;
     background: #c0c0c0;
     border: 2px solid;
     border-color: #ffffff #808080 #808080 #ffffff;
     box-shadow: 1px 1px 0 black;
     cursor: pointer;
+    font-size: 12px;
+    transition: all 0.1s;
+    font-family: "Courier New", monospace;
+    flex: 0 0 auto;
+    margin-left: 6px;
 }
 
-.start-btn:active {
+.shutdown-btn:hover {
+    background-color: #e0e0e0;
+}
+
+.shutdown-btn:active {
     border-color: #808080 #ffffff #ffffff #808080;
-    box-shadow: none;
+    box-shadow: inset 1px 1px 0 black;
+}
+
+.shutdown-btn:focus {
+    outline: 1px dotted #000080;
 }
 
 .clock {
@@ -214,11 +268,14 @@ body {
     text-align: center;
 }
 
-/* ================= BOOT / BSOD ================= */
+/* ================= BOOT ================= */
 
 #boot-screen {
     position: fixed;
-    inset: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
     background-color: black;
     color: #00ff00;
     font-family: 'Courier New', monospace;
@@ -243,17 +300,53 @@ body {
     color: black;
 }
 
+#power-on-btn:hover {
+    color: #0f0; /* Green LED glow */
+    border-color: #0f0;
+    box-shadow: 0 0 20px rgba(0, 255, 0, 0.5);
+    text-shadow: 0 0 10px rgba(0, 255, 0, 0.8);
+}
+
+#shutdown-screen p {
+    user-select: none;
+    letter-spacing: 2px;
+}
+
+/* Projects */
+.folder-item {
+    padding: 4px 8px;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.folder-item:hover {
+    background-color: #000080;
+    color: white;
+}
+
+.folder-item.active-folder {
+    background-color: #000080;
+    color: white;
+    outline: 1px dotted #fff;
+}
+
+#explorer-content h3 {
+    margin-top: 0;
+    font-size: 16px;
+    color: #000080;
+}
+
 /* Container for the image */
 .profile-frame {
     width: 140px;           /* Fixed size for a "passport" photo look */
     height: 140px;
     background: #000;       /* Black background in case image fails */
     padding: 2px;
-    
+
     /* Classic "Sunk-in" Retro Border */
     border: 2px solid;
-    border-color: #808080 #ffffff #ffffff #808080; 
-    
+    border-color: #808080 #ffffff #ffffff #808080;
+
     display: flex;
     justify-content: center;
     align-items: center;
@@ -265,8 +358,8 @@ body {
     width: 100%;
     height: 100%;
     object-fit: cover;      /* Keeps the aspect ratio even if your file isn't square */
-    
+
     /* Optional: This makes your JPEG look like pixel art if it's small! */
-    image-rendering: pixelated; 
+    image-rendering: pixelated;
     filter: contrast(1.1) grayscale(0.2); /* Gives it a slight "old camera" vibe */
 }

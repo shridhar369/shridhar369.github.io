@@ -1,0 +1,83 @@
+/* ================= CLIPPY ================= */
+
+/* Container positioned above the taskbar */
+.clippy-container {
+    position: fixed;
+    bottom: 80px;
+    right: 20px;
+    display: none; /* Keep him hidden during BIOS */
+    opacity: 0;
+    flex-direction: column;
+    align-items: center;
+    z-index: 9999;
+    transition: opacity 1.5s ease-in-out;
+}
+
+/* The Paperclip with Pulse & Glow */
+.clippy-avatar {
+    font-size: 50px;
+    user-select: none;
+    filter: drop-shadow(0 0 8px rgba(0, 255, 255, 0.8));
+    animation: clippy-pulse 2s infinite alternate;
+    transition: transform 0.2s;
+}
+
+/* The Retro Yellow Speech Bubble */
+.clippy-balloon {
+    background: #FFFFE1;
+    border: 1px solid black;
+    padding: 10px;
+    font-size: 12px;
+    font-family: 'Tahoma', 'Arial', sans-serif;
+    width: 150px;
+    margin-bottom: 15px;
+    position: relative;
+    box-shadow: 0 0 10px rgba(255, 255, 204, 0.6), 2px 2px 0px rgba(0, 0, 0, 0.2);
+    color: black;
+}
+
+/* The Triangle Tail for that 90s look */
+.clippy-balloon::after {
+    content: '';
+    position: absolute;
+    bottom: -11px;
+    right: 20px;
+    border-width: 11px 11px 0 0;
+    border-style: solid;
+    border-color: black transparent transparent transparent;
+}
+
+.clippy-balloon::before {
+    content: '';
+    position: absolute;
+    bottom: -9px;
+    right: 21px;
+    border-width: 10px 10px 0 0;
+    border-style: solid;
+    border-color: #FFFFE1 transparent transparent transparent;
+    z-index: 1;
+}
+
+/* Animations: Pulse and Shake */
+@keyframes clippy-pulse {
+    from {
+        transform: scale(1);
+        filter: drop-shadow(0 0 3px rgba(0, 255, 255, 0.4));
+    }
+
+    to {
+        transform: scale(1.1);
+        filter: drop-shadow(0 0 15px rgba(0, 255, 255, 1));
+    }
+}
+
+@keyframes retro-shake {
+    0%, 100% { transform: translate(0, 0); }
+    25% { transform: translate(-8px, 2px); }
+    50% { transform: translate(8px, -2px); }
+    75% { transform: translate(-8px, -2px); }
+}
+
+.shake {
+    animation: retro-shake 0.4s ease-in-out !important;
+}

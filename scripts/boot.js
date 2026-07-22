@@ -1,19 +1,47 @@
+// --- TYPING SOUND (Web Audio API) ---
+let audioCtx = null;
+
+function unlockAudio() {
+    if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    } else if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+    }
+}
+
+function playTypeTick() {
+    if (!audioCtx || audioCtx.state !== 'running') return;
+    try {
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.type = 'square';
+        const now = audioCtx.currentTime;
+        osc.frequency.setValueAtTime(760 + Math.random() * 110, now);
+        gain.gain.setValueAtTime(0.012, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.06);
+        osc.start(now);
+        osc.stop(now + 0.06);
+    } catch (e) { }
+}
+
 // --- FAST BIOS TYPEWRITER ---
 const biosLines = [
     "For the Correct Version, open it on your computer",
     "",
-    
+
     "S-BIOS (C) 2025 Portfolio Systems Inc.",
     "Beta Version 1.0.0  |  Build: 12/31/1999",
     "Architecture: 100% Vanilla HTML/CSS/JS",
     "",
-    
+
     "CPU: Intel(R) 80486 DX2 @ 3.6GHz",
     "GPU: Integrated",
     "Checking RAM ............ OK",
     "Detecting Memory .......... OK",
     "",
-    
+
     "Verifying System Integrity",
     "SYSTEM READY"
 ];
@@ -34,18 +62,34 @@ function typeBiosText() {
 
     if (charIndex < line.length) {
         biosTextElem.textContent += line.charAt(charIndex);
+        playTypeTick();
         charIndex++;
-        setTimeout(typeBiosText, 6); // 🔥 FAST typing
+        setTimeout(typeBiosText, 10);
     } else {
         biosTextElem.textContent += "\n";
         charIndex = 0;
         lineIndex++;
-        setTimeout(typeBiosText, 150); // quick line delay
+        setTimeout(typeBiosText, 80); // quick line delay
     }
 }
 
 window.addEventListener("load", () => {
-    typeBiosText();
+    // Show the pre-boot prompt — wait for user click/keypress to unlock audio
+    const preBootMsg = document.getElementById('pre-boot-msg');
+    if (preBootMsg) {
+        preBootMsg.style.display = 'block';
+    }
+
+    function startBoot() {
+        unlockAudio();
+        if (preBootMsg) preBootMsg.style.display = 'none';
+        typeBiosText();
+        document.removeEventListener('keydown', startBoot);
+        document.removeEventListener('click', startBoot);
+    }
+
+    document.addEventListener('keydown', startBoot, { once: true });
+    document.addEventListener('click', startBoot, { once: true });
 });
 
 
@@ -56,10 +100,10 @@ function updateClock() {
     let hours = now.getHours();
     const minutes = String(now.getMinutes()).padStart(2, '0');
     const ampm = hours >= 12 ? 'PM' : 'AM';
-    
+
     hours = hours % 12;
     hours = hours ? hours : 12; // the hour '0' should be '12'
-    
+
     const timeString = `${hours}:${minutes} ${ampm}`;
     document.getElementById('clock').textContent = timeString;
 }
@@ -73,12 +117,22 @@ let zIndexCounter = 10;
 function openWindow(id) {
     const win = document.getElementById(id);
     win.style.display = 'flex';
+    delete win.dataset.minimized;
     bringToFront(win);
     updateTaskbar();
 }
 
 function closeWindow(id) {
     const win = document.getElementById(id);
+    win.style.display = 'none';
+    delete win.dataset.minimized;
+    updateTaskbar();
+}
+
+function minimizeWindow(id) {
+    const win = document.getElementById(id);
+    if (!win) return;
+    win.dataset.minimized = 'true';
     win.style.display = 'none';
     updateTaskbar();
 }
@@ -90,7 +144,7 @@ function updateTaskbar() {
     document
         .querySelectorAll('.window[data-taskbar="true"]')
         .forEach(win => {
-            if (win.style.display !== 'none') {
+            if (win.style.display !== 'none' || win.dataset.minimized === 'true') {
                 // Prefer the desktop icon label that opens this window (if present)
                 let label = null;
 
@@ -115,7 +169,14 @@ function updateTaskbar() {
                 tab.className = 'task-tab';
                 tab.textContent = label;
 
-                tab.onclick = () => bringToFront(win);
+                if (win.dataset.minimized === 'true') tab.classList.add('minimized-tab');
+                tab.onclick = () => {
+                    if (win.dataset.minimized === 'true') {
+                        win.style.display = 'flex';
+                        delete win.dataset.minimized;
+                    }
+                    bringToFront(win);
+                };
 
                 tabsContainer.appendChild(tab);
             }
@@ -152,10 +213,10 @@ function makeDraggable(element) {
         // Get the mouse cursor position at startup
         pos3 = e.clientX;
         pos4 = e.clientY;
-        
+
         document.onmouseup = closeDragElement;
         document.onmousemove = elementDrag;
-        
+
         // Bring window to front when dragging starts
         bringToFront(element);
     }
@@ -167,7 +228,7 @@ function makeDraggable(element) {
         pos2 = pos4 - e.clientY;
         pos3 = e.clientX;
         pos4 = e.clientY;
-        
+
         // Set the element's new position
         element.style.top = (element.offsetTop - pos2) + "px";
         element.style.left = (element.offsetLeft - pos1) + "px";
@@ -211,6 +272,9 @@ function bootSystem() {
     audio.play().catch(err => {
         console.log("Audio issue:", err);
     });
+
+    // 4. Init music player
+    if (typeof initPlayer === 'function') initPlayer();
 }
 
 /* Folder Logic*/
@@ -238,18 +302,18 @@ function showFolder(folderId) {
 
 function shutDown() {
     const shutdownScreen = document.getElementById('shutdown-screen');
-    
+
     // Optional: Add a quick "flicker" before going black
     document.body.style.filter = "brightness(2) contrast(3)";
-    
+
     setTimeout(() => {
         document.body.style.filter = "none";
         shutdownScreen.style.display = 'flex';
-        
+
         // Hide the main desktop so it's truly "gone"
         document.getElementById('main-desktop').style.display = 'none';
         document.getElementById('taskbar').style.display = 'none';
-        
+
         // Clippy also disappears into the void
         const clippy = document.querySelector('.clippy-container');
         if (clippy) clippy.style.display = 'none';

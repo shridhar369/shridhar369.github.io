@@ -1,3 +1,4 @@
+/* ================= GAME / EFFECTS ================= */
 
 #target-btn {
     position: absolute;
@@ -12,13 +13,13 @@
 
 /* 1. The new animation: changing the overlay opacity */
 @keyframes flash-red-overlay {
-    0% { background-color: rgba(255, 0, 0, 0); } /* Transparent */
-    50% { background-color: rgba(255, 0, 0, 0.4); } /* Semi-transparent Red */
+    0%   { background-color: rgba(255, 0, 0, 0); }    /* Transparent */
+    50%  { background-color: rgba(255, 0, 0, 0.4); }  /* Semi-transparent Red */
     100% { background-color: rgba(255, 0, 0, 0); }
 }
 
 /* 2. Create a "Flash Layer" that sits on top of the wallpaper but behind icons */
-.screen-glitch #main-desktop::before {
+.screen-glitch .desktop::before {
     content: "";
     position: absolute;
     top: 0;
@@ -34,19 +35,22 @@
     transition: width 0.1s linear;
 }
 
+body:has(#bsod[style*="display: block"]) {
+    animation: none !important;
+    transform: none !important;
+}
+
 #bsod {
     display: none;
     position: fixed;
-    inset: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
     background-color: #0000AA;
     color: white;
     font-family: 'Courier New', monospace;
     font-weight: bold;
     z-index: 10000;
     padding: 100px;
-}
-
-body:has(#bsod[style*="display: block"]) {
-    animation: none !important;
-    transform: none !important;
 }

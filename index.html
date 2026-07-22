@@ -1,370 +1,449 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-PLRX550914"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-PLRX550914');
-</script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-PLRX550914"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-PLRX550914');
+    </script>
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Portfolio</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio</title>
 
-<link rel="stylesheet" href="style.css">
-<link rel="icon" type="image/png" href="assets/icon.png">
-
-
+    <link rel="stylesheet" href="style/boot.css">
+    <link rel="stylesheet" href="style/clippy.css">
+    <link rel="stylesheet" href="style/game.css">
+    <link rel="stylesheet" href="style/player.css">
+    <link rel="icon" type="image/png" href="assets/icon.png">
 </head>
+
 
 <body>
 
-<audio id="startup-sound" src="assets/x.ogv" preload="auto"></audio>
+    <audio id="startup-sound" src="assets/x.ogv" preload="auto"></audio>
 
-<div id="boot-screen">
-    <div class="boot-content">
-        <pre id="bios-text" class="bios-text"></pre>
-        <button id="boot-btn" class="boot-btn" onclick="bootSystem()" style="display:none;">
-            [ CLICK TO BOOT SYSTEM ]
-        </button>
-    </div>
-</div>
-
-<div class="desktop" id="main-desktop" style="display:none;">
-<div class="icon-container">
-
-    <div class="icon" onclick="openWindow('about-window')">
-        <div class="icon-img">👤</div>
-        <div class="icon-label">About-Me</div>
-    </div>
-
-    <div class="icon" onclick="openWindow('projects-window')">
-        <div class="icon-img">📁</div>
-        <div class="icon-label">Projects-
-            SideQuests</div>
-    </div>
-
-    <div class="icon" onclick="openWindow('media-window')">
-        <div class="icon-img">📺</div>
-        <div class="icon-label">Media_Log</div>
-    </div>
-
-    <div class="icon" onclick="openWindow('contact-window')">
-        <div class="icon-img">✉️</div>
-        <div class="icon-label">Contact</div>
-    </div>
-
-    <div class="icon" onclick="startMalfunction()">
-        <div class="icon-img">⚠️</div>
-        <div class="icon-label">DANGER</div>
-    </div>
-
-</div>
-
-
-<!-- ABOUT WINDOW -->
-<div id="about-window" class="window draggable" data-taskbar="true"
-     style="display:none; top:5%; left:10%; width:520px; height:480px;">
-
-    <div class="title-bar">
-        <div class="title-bar-text">About_Me</div>
-        <div class="title-bar-controls">
-            <button onclick="closeWindow('about-window')">X</button>
-        </div>
-    </div>
-
-
-
-    <div class="window-body">
-
-        <div style="display:flex; gap:15px; margin-bottom:10px;">
-            <div class="profile-frame">
-                <img src="assets/me.jpeg"
-                     alt="Pixelated portrait of Shridhar"
-                     class="profile-pixel">
+    <div id="boot-screen">
+        <div class="boot-content">
+            <div id="pre-boot-msg"
+                style="display:none; color:#00ff00; font-family:'Courier New',monospace; font-size:16px; text-align:center; margin-top: 40vh; animation: blink 1s step-end infinite;">
+                _ PRESS ANY KEY TO BOOT _
             </div>
-
-            <div>
-                <h3 style="margin:0; font-size:18px; padding-top:50px;">SYS_ADMIN.EXE</h3>
-            </div>
-        </div>
-
-        <hr>
-
-        <p><strong>Hi, I’m Shridhar.</strong></p>
-
-        <p>
-       I am a B.Tech student in Information Science at SDM College, Dharwad. This website is a personal project to showcase 
-       my skills and interests in a retro OS style. I’m building it using just HTML, CSS, and JavaScript to strengthen my web 
-       development fundamentals. The goal is to create an interactive experience that reflects my personality and technical abilities, 
-       while giving me hands-on practice in coding and sharing a bit about myself.
-        </p>
-
- <details>
-            <summary style="cursor:pointer; color:navy; font-weight:bold;">
-              Interests
-            </summary>
-            <p>
-        Outside academics, I’m really into video games, web series, a bit of anime and movies.
-        I enjoy experiences that make you think — whether that’s a complex game system
-        or deep philosophical ideas.
-        </p>
-
-        <p>
-        I'm also into late-night internet rabbit holes — ARGs, analog horror, true crime, obscure wikis.
-        I love finding hidden patterns in stories and exploring the deeper corners of the internet.
-        ADHD brain + curiosity = 3 AM discoveries.
-        </p>
-        </details>
-<br>
-        <details>
-            <summary style="cursor:pointer; color:navy; font-weight:bold;">
-                Currently learning
-            </summary>
-
-        <ul>
-            <li>Basics of web programming</li>
-            <li>C,C++</li>
-            <li>Cybersec And Linux fundamentals</li>
-            </li>
-        </ul>    
-
-            <p>
-        I value curiosity, honesty, and continuous learning.
-        </p>
-<p style="color:#b8b8be; user-select: text; cursor: default; font-size: 12px;">
-   You found the back door: <a href="https://www.youtube.com/watch?v=oHg5SJYRHA0" target="_blank"
-      style="color: inherit; text-decoration: none; cursor: default;">
-      Secret
-   </a>
-</p>
-        </details>
-
-    </div>
-</div>
-
-<!-- MEDIA WINDOW -->
-<div id="media-window" class="window draggable" data-taskbar="true"
-     style="display: none; top: 30%; left: 15%; width: 400px; height:480px;">
-
-    <div class="title-bar">
-        <div class="title-bar-text">Entertainment.log</div>
-        <div class="title-bar-controls">
-            <button onclick="closeWindow('media-window')">X</button>
-        </div>
-    </div>
-
-    <div class="window-body" style="background: #e0e0e0;">
-
-        <h4>Analog Horror And ARGs</h4>
-        <ul style="font-size: 15px;">
-            <li>The Walten files</li>
-            <li>The Mandela Catalogue</li>
-            <li>Cicada 3301 (Maybe real)</li>
-        </ul>
-
-        <h3 style="margin-top: 0;">🎮Gaming</h3>
-
-        <h4>Fav Games:</h4>
-        <ul style="font-size: 15px;">
-            <li>RDR2</li>
-            <li>Undertale</li>
-            <li>Dying Light</li>
-            <li>A Way Out</li>
-        </ul>
-        <p>...</p>
-
-        <h4 style="margin-top: 0;">Currently Playing:</h4>
-        <p style="font-size: 15px; border-left: 3px solid navy; padding-left: 5px;">
-            -The Last of Us Part 1 <br>
-            -Brawl stars (moba)
-        </p>
-
-        <h4>🎬 Fav Shows</h4>
-        <ul style="font-size: 15px;">
-            <li>Dexter</li>
-            <li>Breaking Bad</li>
-            <li>The Big Bang Theory</li>
-            <li>Better Call Saul</li>
-        </ul>
-         <p>...</p>
-
-    </div>
-</div>
-
-
-<div id="projects-window" class="window draggable" data-taskbar="true"
-     style="display: none; top: 10%; left: 20%; width: 600px; height: 400px;">
-
-    <div class="title-bar">
-        <div class="title-bar-text">Exploring - C:\Projects|SIDE_HUSTLES</div>
-        <div class="title-bar-controls">
-            <button onclick="closeWindow('projects-window')">X</button>
-        </div>
-    </div>
-
-
-    <div class="window-body" style="display: flex; padding: 0; overflow: hidden; background: white;">
-        
-        <div class="folder-tree" style="width: 150px; border-right: 2px inset #ffffff; background: #fff; padding: 10px; font-size: 12px;">
-            <div class="folder-item" onclick="showFolder('Projects')">📁 Projects</div>
-            <div class="folder-item" onclick="showFolder('media')">📁 Media</div>
-            <div class="folder-item" onclick="showFolder('crypto')">📁 Crypto</div>
-            <div class="folder-item" onclick="showFolder('affiliate')">📁 Commerce</div>
-        </div>
-
-        <div id="explorer-content" style="flex: 1; padding: 20px; overflow-y: auto; background: #fff; color: black;">
-            <div id="default-msg">
-                <p>Select a folder to view contents.</p>
-            </div>
-            <div id="folder-Projects" class="folder-content" style="display:none;">
-                <h3>Projects</h3>
-                <p>Status:In_Progress</p>
-                <hr>
-                </div>
-
-
-            <div id="folder-media" class="folder-content" style="display:none;">
-                <h3><a href="https://www.youtube.com/channel/UCGZz20Y410H1IIn84G9L6cw" target="_blank">Bhava Prapancha (YT)</a></h3>
-
-                <p>Status:Channel Manager</p>
-                <hr>
-                <p>YouTube Channel Operations — "Bhava Prapancha" I initially handled the video editing and technical setup for the channel. 
-                After establishing a production workflow, I taught my mother the editing process and creative tools, enabling her to take 
-                over the content production. I now focus on managing the channel’s backend, Audio levelling, optimizing metadata for SEO, 
-                and overseeing overall digital growth.</p>
-            </div>
-
-            <div id="folder-crypto" class="folder-content" style="display:none;">
-                <h3>Mining_Operation.log</h3>
-                <p>Hashrate:Optimized</p>
-                <hr>
-                <p>I ran a mining setup using an NVIDIA RTX A2000 workstation card. Using NiceHash, I optimized the hardware by "overclocking" 
-                    it for maximum speed while carefully managing heat to prevent the system from slowing down.
-                    After tracking my data, I realized the earnings were almost entirely cancelled out by the cost of electricity.
-                    While it didn't turn a good profit, the project was a hands-on lesson in hardware limits, thermal management, and the 
-                    real-world economics of blockchain technology.</p>
-            </div>
-
-            <div id="folder-affiliate" class="folder-content" style="display:none;">
-                <h3>Amazon_Assoc.lnk</h3>
-                <hr>
-                <p>Accepted into Amazon Associates program through blog publishing; built referral networks and indirectly 
-                   generated income from purchases made via referral links.
-                </p>
-            </div>
-
-        </div>
-    </div>
-</div>
-
-
-<!-- CONTACT WINDOW -->
-<div id="contact-window" class="window draggable" data-taskbar="true"
-     style="display: none; top: 20%; left: 20%;">
-
-    <div class="title-bar">
-        <div class="title-bar-text">Contact Info</div>
-        <div class="title-bar-controls">
-            <button onclick="closeWindow('contact-window')">X</button>
-        </div>
-    </div>
-
-    <div class="window-body">
-        <p>Email: shidu3250b@proton.me</p>
-        <p>Insta: Idothings369</p>
-        <p>LinkedIn? That's a "TODO" item.</p>
-    </div>
-</div>
-
-
-
-<!-- TASKBAR -->
-<div class="taskbar" id="taskbar" style="display: none;">
-    <button class="shutdown-btn" onclick="shutDown()" title="Shut Down System">
-        ⏻ Shut Down
-    </button>
-        <div id="taskbar-tabs"></div>
-    <div class="clock" id="clock">12:00 PM</div>
-</div>
-</div>
-
-
-<div class="clippy-container" onclick="clippyClick()">
-    <div class="clippy-balloon">
-        <span id="clippy-text">Hi! I'm Clippy!</span>
-    </div>
-    <div class="clippy-avatar">📎</div>
-</div>
-
-
-
-<!-- GAME / MALFUNCTION WINDOW -->
-<div id="game-window" class="window draggable"
-     style="display: none; top: 20%; left: 35%; width: 300px; border-color: red;">
-
-    <div class="title-bar"
-         style="background: linear-gradient(90deg, #ff0000, #8b0000);">
-        <div class="title-bar-text">⚠️ CRITICAL_FAILURE.exe</div>
-    </div>
-
-    <div class="window-body" style="background-color: #000; color: #ff0000;">
-        <p style="font-weight: bold; animation: blink 0.5s infinite;">
-            !!! SECURITY BREACH !!!
-        </p>
-
-        <div id="progress-container"
-             style="width: 100%; height: 20px; background: #333;
-                    border: 2px solid #8b0000; margin: 10px 0;">
-            <div id="integrity-bar"
-                 style="width: 100%; height: 100%; background: #ff0000;"></div>
-        </div>
-        <p>Hint:Click on The Errors</p>
-
-        <p id="game-status">GLITCHES CAUGHT: 0/5</p>
-
-        <div id="game-area"
-             style="height: 180px; position: relative; background: #111;
-                    border: 2px inset #ff0000; overflow: hidden;">
-            <button id="target-btn" class="retro-btn"
-                    style="position: absolute; display: none;">
-                ERROR
+            <pre id="bios-text" class="bios-text"></pre>
+            <button id="boot-btn" class="boot-btn" onclick="bootSystem()" style="display:none;">
+                [ CLICK TO BOOT SYSTEM ]
             </button>
         </div>
     </div>
-</div>
+
+    <div class="desktop" id="main-desktop" style="display:none;">
+        <div class="icon-container">
+
+            <div class="icon" onclick="openWindow('about-window')">
+                <div class="icon-img">👤</div>
+                <div class="icon-label">About-Me</div>
+            </div>
+
+            <div class="icon" onclick="openWindow('projects-window')">
+                <div class="icon-img">📁</div>
+                <div class="icon-label">Projects-
+                    SideQuests</div>
+            </div>
+
+            <div class="icon" onclick="openWindow('media-window')">
+                <div class="icon-img">📺</div>
+                <div class="icon-label">Media_Log</div>
+            </div>
+
+            <div class="icon" onclick="openWindow('contact-window')">
+                <div class="icon-img">✉️</div>
+                <div class="icon-label">Contact</div>
+            </div>
+
+            <div class="icon" onclick="startMalfunction()">
+                <div class="icon-img">⚠️</div>
+                <div class="icon-label">DANGER</div>
+            </div>
+
+            <div class="icon" onclick="openWindow('player-window')">
+                <div class="icon-img">🎵</div>
+                <div class="icon-label">Music_Player</div>
+            </div>
+
+        </div>
 
 
-<div id="bsod" onclick="reboot()">
-    <p>A problem has been detected and RetroOS has been shut down to prevent damage to your computer.</p>
-    <p>FATAL_ERROR_CODE: 0x0000005C</p>
-    <br>
-    <p>If this is the first time you've seen this Stop error screen, restart your computer. If this screen appears again, follow these steps:</p>
-    <br>
-    <p>Press ANY KEY to restart _</p>
-</div>
+        <!-- ABOUT WINDOW -->
+        <div id="about-window" class="window draggable" data-taskbar="true"
+            style="display:none; top:5%; left:10%; width:520px; height:480px;">
+
+            <div class="title-bar">
+                <div class="title-bar-text">About_Me</div>
+                <div class="title-bar-controls">
+                    <button onclick="minimizeWindow('about-window')" title="Minimize">_</button>
+                    <button onclick="closeWindow('about-window')">X</button>
+                </div>
+            </div>
 
 
-<div id="shutdown-screen" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: black; z-index: 10000; flex-direction: column; justify-content: center; align-items: center; color: 
+
+            <div class="window-body">
+
+                <div style="display:flex; gap:15px; margin-bottom:10px;">
+                    <div class="profile-frame">
+                        <img src="assets/me.jpeg" alt="Pixelated portrait of Shridhar" class="profile-pixel">
+                    </div>
+
+                    <div>
+                        <h3 style="margin:0; font-size:18px; padding-top:50px;">SYS_ADMIN.EXE</h3>
+                    </div>
+                </div>
+
+                <hr>
+
+                <p><strong>Hi, I’m Shridhar.</strong></p>
+
+                <p>
+                    I am a B.Tech student in Information Science at SDM College, Dharwad. This website is a personal
+                    project to showcase
+                    my skills and interests in a retro OS style. I’m building it using just HTML, CSS, and JavaScript to
+                    strengthen my web
+                    development fundamentals. The goal is to create an interactive experience that reflects my
+                    personality and technical abilities,
+                    while giving me hands-on practice in coding and sharing a bit about myself.
+                </p>
+
+                <details>
+                    <summary style="cursor:pointer; color:navy; font-weight:bold;">
+                        Interests
+                    </summary>
+                    <p>
+                        Outside academics, I’m really into video games, web series, a bit of anime and movies.
+                        I enjoy experiences that make you think — whether that’s a complex game system
+                        or deep philosophical ideas.
+                    </p>
+
+                    <p>
+                        I'm also into late-night internet rabbit holes — ARGs, analog horror, true crime, obscure wikis.
+                        I love finding hidden patterns in stories and exploring the deeper corners of the internet.
+                        ADHD brain + curiosity = 3 AM discoveries.
+                    </p>
+                </details>
+                <br>
+                <details>
+                    <summary style="cursor:pointer; color:navy; font-weight:bold;">
+                        Currently learning
+                    </summary>
+
+                    <ul>
+                        <li>Basics of web programming</li>
+                        <li>C,C++</li>
+                        <li>Cybersec And Linux fundamentals</li>
+                        </li>
+                    </ul>
+
+                    <p>
+                        I value curiosity, honesty, and continuous learning.
+                    </p>
+                    <p style="color:#b8b8be; user-select: text; cursor: default; font-size: 12px;">
+                        You found the back door: 1.@FuturePresentTeller <br> <a
+                            href="https://www.youtube.com/watch?v=oHg5SJYRHA0" target="_blank"
+                            style="color: inherit; text-decoration: none; cursor: default;">
+                            2.Secret
+                        </a>
+                    </p>
+                </details>
+
+            </div>
+        </div>
+
+        <!-- MEDIA WINDOW -->
+        <div id="media-window" class="window draggable" data-taskbar="true"
+            style="display: none; top: 30%; left: 15%; width: 400px; height:480px;">
+
+            <div class="title-bar">
+                <div class="title-bar-text">Entertainment.log</div>
+                <div class="title-bar-controls">
+                    <button onclick="minimizeWindow('media-window')" title="Minimize">_</button>
+                    <button onclick="closeWindow('media-window')">X</button>
+                </div>
+            </div>
+
+            <div class="window-body" style="background: #e0e0e0;">
+
+                <h4>Analog Horror And ARGs</h4>
+                <ul style="font-size: 15px;">
+                    <li>The Walten files</li>
+                    <li>The Mandela Catalogue</li>
+                    <li>Cicada 3301 (Maybe real)</li>
+                </ul>
+
+                <h3 style="margin-top: 0;">🎮Gaming</h3>
+
+                <h4>Fav Games:</h4>
+                <ul style="font-size: 15px;">
+                    <li>RDR2</li>
+                    <li>Undertale</li>
+                    <li>Dying Light</li>
+                    <li>A Way Out</li>
+                </ul>
+                <p>...</p>
+
+                <h4 style="margin-top: 0;">Currently Playing:</h4>
+                <p style="font-size: 15px; border-left: 3px solid navy; padding-left: 5px;">
+                    -The Last of Us Part 1 <br>
+                    -Brawl stars (moba)
+                </p>
+
+                <h4>🎬 Fav Shows</h4>
+                <ul style="font-size: 15px;">
+                    <li>Dexter</li>
+                    <li>Breaking Bad</li>
+                    <li>The Big Bang Theory</li>
+                    <li>Better Call Saul</li>
+                </ul>
+                <p>...</p>
+
+            </div>
+        </div>
+
+
+        <div id="projects-window" class="window draggable" data-taskbar="true"
+            style="display: none; top: 10%; left: 20%; width: 600px; height: 400px;">
+
+            <div class="title-bar">
+                <div class="title-bar-text">Exploring - C:\Projects|SIDE_HUSTLES</div>
+                <div class="title-bar-controls">
+                    <button onclick="minimizeWindow('projects-window')" title="Minimize">_</button>
+                    <button onclick="closeWindow('projects-window')">X</button>
+                </div>
+            </div>
+
+
+            <div class="window-body" style="display: flex; padding: 0; overflow: hidden; background: white;">
+
+                <div class="folder-tree"
+                    style="width: 150px; border-right: 2px inset #ffffff; background: #fff; padding: 10px; font-size: 12px;">
+                    <div class="folder-item" onclick="showFolder('Projects')">📁 Projects</div>
+                    <div class="folder-item" onclick="showFolder('media')">📁 Media</div>
+                    <div class="folder-item" onclick="showFolder('crypto')">📁 Crypto</div>
+                    <div class="folder-item" onclick="showFolder('affiliate')">📁 Commerce</div>
+                </div>
+
+                <div id="explorer-content"
+                    style="flex: 1; padding: 20px; overflow-y: auto; background: #fff; color: black;">
+                    <div id="default-msg">
+                        <p>Select a folder to view contents.</p>
+                    </div>
+                    <div id="folder-Projects" class="folder-content" style="display:none;">
+                        <h3>Projects</h3>
+                        <p>Status:In_Progress</p>
+                        <hr>
+                    </div>
+
+
+                    <div id="folder-media" class="folder-content" style="display:none;">
+                        <h3><a href="https://www.youtube.com/channel/UCGZz20Y410H1IIn84G9L6cw" target="_blank">Bhava
+                                Prapancha (YT)</a></h3>
+
+                        <p>Status:Channel Manager</p>
+                        <hr>
+                        <p>YouTube Channel Operations — "Bhava Prapancha" I initially handled the video editing and
+                            technical setup for the channel.
+                            After establishing a production workflow, I taught my mother the editing process and
+                            creative tools, enabling her to take
+                            over the content production. I now focus on managing the channel’s backend, Audio levelling,
+                            optimizing metadata for SEO,
+                            and overseeing overall digital growth.</p>
+                    </div>
+
+                    <div id="folder-crypto" class="folder-content" style="display:none;">
+                        <h3>Mining_Operation.log</h3>
+                        <p>Hashrate:Optimized</p>
+                        <hr>
+                        <p>I ran a mining setup using an NVIDIA RTX A2000 workstation card. Using NiceHash, I optimized
+                            the hardware by "overclocking"
+                            it for maximum speed while carefully managing heat to prevent the system from slowing down.
+                            After tracking my data, I realized the earnings were almost entirely cancelled out by the
+                            cost of electricity.
+                            While it didn't turn a good profit, the project was a hands-on lesson in hardware limits,
+                            thermal management, and the
+                            real-world economics of blockchain technology.</p>
+                    </div>
+
+                    <div id="folder-affiliate" class="folder-content" style="display:none;">
+                        <h3>Amazon_Assoc.lnk</h3>
+                        <hr>
+                        <p>Accepted into Amazon Associates program through blog publishing; built referral networks and
+                            indirectly
+                            generated income from purchases made via referral links.
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+        <!-- CONTACT WINDOW -->
+        <div id="contact-window" class="window draggable" data-taskbar="true"
+            style="display: none; top: 20%; left: 20%;">
+
+            <div class="title-bar">
+                <div class="title-bar-text">Contact Info</div>
+                <div class="title-bar-controls">
+                    <button onclick="minimizeWindow('contact-window')" title="Minimize">_</button>
+                    <button onclick="closeWindow('contact-window')">X</button>
+                </div>
+            </div>
+
+            <div class="window-body">
+                <p>Email: shidu3250b@proton.me</p>
+                <p>Insta: Idothings369</p>
+                <p>LinkedIn? That's a "TODO" item.</p>
+            </div>
+        </div>
+
+
+
+        <!-- TASKBAR -->
+        <div class="taskbar" id="taskbar" style="display: none;">
+            <button class="shutdown-btn" onclick="shutDown()" title="Shut Down System">
+                ⏻ Shut Down
+            </button>
+            <div id="taskbar-tabs"></div>
+            <div class="clock" id="clock">12:00 PM</div>
+        </div>
+    </div>
+
+
+    <div class="clippy-container" onclick="clippyClick()">
+        <div class="clippy-balloon">
+            <span id="clippy-text">Hi! I'm Clippy!</span>
+        </div>
+        <div class="clippy-avatar">📎</div>
+    </div>
+
+
+
+    <!-- GAME / MALFUNCTION WINDOW -->
+    <div id="game-window" class="window draggable"
+        style="display: none; top: 20%; left: 35%; width: 300px; border-color: red;">
+
+        <div class="title-bar" style="background: linear-gradient(90deg, #ff0000, #8b0000);">
+            <div class="title-bar-text">⚠️ CRITICAL_FAILURE.exe</div>
+        </div>
+
+        <div class="window-body" style="background-color: #000; color: #ff0000;">
+            <p style="font-weight: bold; animation: blink 0.5s infinite;">
+                !!! SECURITY BREACH !!!
+            </p>
+
+            <div id="progress-container" style="width: 100%; height: 20px; background: #333;
+                    border: 2px solid #8b0000; margin: 10px 0;">
+                <div id="integrity-bar" style="width: 100%; height: 100%; background: #ff0000;"></div>
+            </div>
+            <p>Hint:Click on The Errors</p>
+
+            <p id="game-status">GLITCHES CAUGHT: 0/5</p>
+
+            <div id="game-area" style="height: 180px; position: relative; background: #111;
+                    border: 2px inset #ff0000; overflow: hidden;">
+                <button id="target-btn" class="retro-btn" style="position: absolute; display: none;">
+                    ERROR
+                </button>
+            </div>
+        </div>
+    </div>
+
+
+    <div id="bsod" onclick="reboot()">
+        <p>A problem has been detected and RetroOS has been shut down to prevent damage to your computer.</p>
+        <p>FATAL_ERROR_CODE: 0x0000005C</p>
+        <br>
+        <p>If this is the first time you've seen this Stop error screen, restart your computer. If this screen appears
+            again, follow these steps:</p>
+        <br>
+        <p>Press ANY KEY to restart _</p>
+    </div>
+
+
+    <div id="shutdown-screen" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: black; z-index: 10000; flex-direction: column; justify-content: center; align-items: center; color: 
 #333; justify-content: center;">
-    <button id="power-on-btn" onclick="location.reload()" style="background: none; border: 2px solid #222; border-radius: 50%; width: 80px; height: 80px; cursor: pointer; color: #444; font-size: 30px; transition: 0.3s;
+        <button id="power-on-btn" onclick="location.reload()" style="background: none; border: 2px solid #222; border-radius: 50%; width: 80px; height: 80px; cursor: pointer; color: #444; font-size: 30px; transition: 0.3s;
      display: flex; justify-content: center; align-items: center;">
-        ⏻
-    </button>
-    <p style="margin-top: 20px; font-family: monospace; font-size: 12px;">POWER DOWN</p>
-</div>
+            ⏻
+        </button>
+        <p style="margin-top: 20px; font-family: monospace; font-size: 12px;">POWER DOWN</p>
+    </div>
+
+    <!-- MUSIC PLAYER WINDOW -->
+    <div id="player-window" class="window draggable" data-taskbar="true"
+        style="display:none; top:8%; left:40%; width:340px;">
+
+        <div class="title-bar">
+            <div class="title-bar-text">🎵 RetroPlayer.exe</div>
+            <div class="title-bar-controls">
+                <button onclick="minimizeWindow('player-window')" title="Minimize">_</button>
+                <button onclick="closeWindow('player-window')">X</button>
+            </div>
+        </div>
+
+        <div class="window-body player-body">
+
+            <!-- Now Playing Display -->
+            <div class="player-now-playing">
+                <div class="player-vinyl" id="player-vinyl" aria-label="Vinyl record" role="img"></div>
+                <div class="player-meta">
+                    <div id="player-title">No track loaded</div>
+                    <div id="player-artist">---</div>
+                    <div id="player-track-num">0 / 0</div>
+                </div>
+            </div>
+
+            <!-- Progress Bar -->
+            <div class="player-progress-track" onclick="seekTo(event)">
+                <div id="player-progress"></div>
+            </div>
+            <div id="player-time">0:00 / 0:00</div>
+
+            <!-- Controls -->
+            <div class="player-controls">
+                <button class="player-btn" onclick="prevTrack()" title="Previous">&#9198;</button>
+                <button class="player-btn" id="player-play-btn" onclick="playerPlayPause()"
+                    title="Play/Pause">&#9654;</button>
+                <button class="player-btn" onclick="nextTrack()" title="Next">&#9197;</button>
+            </div>
+
+            <!-- Volume -->
+            <div class="player-volume">
+                <span>🔈</span>
+                <input type="range" min="0" max="100" value="80" oninput="setVolume(this.value)" title="Volume">
+                <span>🔊</span>
+            </div>
+
+            <!-- Playlist -->
+            <div class="player-playlist-box">
+                <div id="player-playlist"></div>
+            </div>
+
+            <div class="player-note">▲ Game, terminal &amp; analog-horror radio</div>
+        </div>
+    </div>
 
 
-<script src="scripts/boot.js"></script>
-<script src="scripts/clippy.js"></script>
-<script src="scripts/game.js"></script>
+    <script src="scripts/boot.js"></script>
+    <script src="scripts/clippy.js"></script>
+    <script src="scripts/game.js"></script>
+    <script src="scripts/player.js"></script>
 
 
 </body>
-<!-- LHWQIB -->
-<!--  https://infoforkannada.blogspot.com/ -->
-</html>
+<!-- https://infoforkannada.blogspot.com/ -->
+<!-- https://www.instagram.com/decoding.k97?igsh=MTc3NHFrMnh6M2phcg== -->
 
+</html>
