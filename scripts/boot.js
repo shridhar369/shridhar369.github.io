@@ -90,7 +90,13 @@ window.addEventListener("load", () => {
 
     document.addEventListener('keydown', startBoot, { once: true });
     document.addEventListener('click', startBoot, { once: true });
+
+    const mainDesktop = document.getElementById('main-desktop');
+    if (mainDesktop && mainDesktop.style.display !== 'none') {
+        startPeriodicShake();
+    }
 });
+
 
 
 
@@ -275,7 +281,45 @@ function bootSystem() {
 
     // 4. Init music player
     if (typeof initPlayer === 'function') initPlayer();
+
+    // 5. Start periodic CRT screen shake (random every 4-7 seconds)
+    startPeriodicShake();
 }
+
+// --- PERIODIC SCREEN SHAKE LOGIC ---
+let periodicShakeTimer = null;
+
+function triggerPeriodicShake() {
+    const shutdownScreen = document.getElementById('shutdown-screen');
+    const bsodScreen = document.getElementById('bsod');
+
+    // Skip shake if system is shut down or BSOD is visible
+    if ((shutdownScreen && shutdownScreen.style.display === 'flex') ||
+        (bsodScreen && bsodScreen.style.display === 'block')) {
+        return;
+    }
+
+    const bodyElem = document.body;
+    bodyElem.classList.add('periodic-shake');
+
+    setTimeout(() => {
+        bodyElem.classList.remove('periodic-shake');
+    }, 400);
+
+    // Random interval between 6 and 9 seconds (4000ms - 9000ms)
+    const nextInterval = Math.floor(Math.random() * 3000) + 6000;
+    periodicShakeTimer = setTimeout(triggerPeriodicShake, nextInterval);
+}
+
+function startPeriodicShake() {
+    if (periodicShakeTimer) clearTimeout(periodicShakeTimer);
+    // Show first glitch tear shortly after boot (1.5s), then every 4-7 seconds
+    periodicShakeTimer = setTimeout(triggerPeriodicShake, 1500);
+}
+
+window.triggerPeriodicShake = triggerPeriodicShake;
+
+
 
 /* Folder Logic*/
 function showFolder(folderId) {

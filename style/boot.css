@@ -8,8 +8,15 @@
 }
 
 @keyframes blink {
-    0%, 100% { opacity: 1; }
-    50%       { opacity: 0; }
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
+    }
 }
 
 /* Reset and Base Font */
@@ -33,7 +40,7 @@ body {
     width: 100vw;
     position: relative;
     padding: 10px;
-    background-image: url('../assets/backroom.jpg');
+    background-image: url('../assets/im_op.gif');
     background-size: cover;
     background-position: center;
 }
@@ -133,7 +140,8 @@ body {
     height: 28px;
     background: #c0c0c0;
     border: 2px solid;
-    border-color: #ffffff #808080 #808080 #ffffff; /* 3D effect */
+    border-color: #ffffff #808080 #808080 #ffffff;
+    /* 3D effect */
     padding: 0 10px;
     font-family: "Courier New", monospace;
     font-size: 12px;
@@ -163,7 +171,8 @@ body {
 
 .task-tab.active-tab {
     background: #e0e0e0;
-    border-color: #808080 #ffffff #ffffff #808080; /* Inset effect */
+    border-color: #808080 #ffffff #ffffff #808080;
+    /* Inset effect */
     font-weight: bold;
 }
 
@@ -301,7 +310,8 @@ body {
 }
 
 #power-on-btn:hover {
-    color: #0f0; /* Green LED glow */
+    color: #0f0;
+    /* Green LED glow */
     border-color: #0f0;
     box-shadow: 0 0 20px rgba(0, 255, 0, 0.5);
     text-shadow: 0 0 10px rgba(0, 255, 0, 0.8);
@@ -338,9 +348,11 @@ body {
 
 /* Container for the image */
 .profile-frame {
-    width: 140px;           /* Fixed size for a "passport" photo look */
+    width: 140px;
+    /* Fixed size for a "passport" photo look */
     height: 140px;
-    background: #000;       /* Black background in case image fails */
+    background: #000;
+    /* Black background in case image fails */
     padding: 2px;
 
     /* Classic "Sunk-in" Retro Border */
@@ -350,16 +362,19 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-shrink: 0;         /* Prevents the frame from squishing in flexboxes */
+    flex-shrink: 0;
+    /* Prevents the frame from squishing in flexboxes */
 }
 
 /* The actual image inside the frame */
 .profile-pixel {
     width: 100%;
     height: 100%;
-    object-fit: cover;      /* Keeps the aspect ratio even if your file isn't square */
+    object-fit: cover;
+    /* Keeps the aspect ratio even if your file isn't square */
 
     /* Optional: This makes your JPEG look like pixel art if it's small! */
     image-rendering: pixelated;
-    filter: contrast(1.1) grayscale(0.2); /* Gives it a slight "old camera" vibe */
+    filter: contrast(1.1) grayscale(0.2);
+    /* Gives it a slight "old camera" vibe */
 }
