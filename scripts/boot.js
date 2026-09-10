@@ -262,6 +262,15 @@ function bootSystem() {
     document.getElementById('main-desktop').style.display = 'block';
     document.getElementById('taskbar').style.display = 'flex';
 
+    // Start background video
+    const bgVideo = document.getElementById('desktop-bg-video');
+    if (bgVideo) {
+        bgVideo.muted = true;
+        bgVideo.play().catch(err => {
+            console.log("Video playback note:", err);
+        });
+    }
+
     // 2. NEW: Reveal Clippy
     const clippy = document.querySelector('.clippy-container');
     if (clippy) {
@@ -357,6 +366,9 @@ function shutDown() {
         // Hide the main desktop so it's truly "gone"
         document.getElementById('main-desktop').style.display = 'none';
         document.getElementById('taskbar').style.display = 'none';
+
+        const bgVideo = document.getElementById('desktop-bg-video');
+        if (bgVideo) bgVideo.pause();
 
         // Clippy also disappears into the void
         const clippy = document.querySelector('.clippy-container');

@@ -40,9 +40,19 @@ body {
     width: 100vw;
     position: relative;
     padding: 10px;
-    background-image: url('../assets/im_op.gif');
-    background-size: cover;
-    background-position: center;
+    background-color: #008080;
+    overflow: hidden;
+}
+
+.desktop-bg-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+    pointer-events: none;
 }
 
 .icon-container {
@@ -90,6 +100,7 @@ body {
     box-shadow: 1px 1px 0px black;
     display: flex;
     flex-direction: column;
+    z-index: 10;
 }
 
 /* Title Bar */
