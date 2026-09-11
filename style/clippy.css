@@ -1,10 +1,10 @@
 /* ================= CLIPPY ================= */
 
-/* Container positioned above the taskbar */
+/* Container positioned directly over the bottom-right watermark */
 .clippy-container {
     position: fixed;
-    bottom: 80px;
-    right: 20px;
+    bottom: 45px;
+    right: 15px;
     display: none; /* Keep him hidden during BIOS */
     opacity: 0;
     flex-direction: column;
@@ -15,21 +15,25 @@
 
 /* The Paperclip with Pulse & Glow */
 .clippy-avatar {
-    font-size: 50px;
+    font-size: 52px;
+    line-height: 1;
     user-select: none;
     filter: drop-shadow(0 0 8px rgba(0, 255, 255, 0.8));
     animation: clippy-pulse 2s infinite alternate;
     transition: transform 0.2s;
+    background: radial-gradient(circle, rgba(0, 0, 0, 0.75) 45%, transparent 70%);
+    border-radius: 50%;
+    padding: 2px 6px;
 }
 
 /* The Retro Yellow Speech Bubble */
 .clippy-balloon {
     background: #FFFFE1;
     border: 1px solid black;
-    padding: 10px;
-    font-size: 12px;
-    font-family: 'Tahoma', 'Arial', sans-serif;
-    width: 150px;
+    padding: 12px 14px;
+    font-size: 13px;
+    line-height: 1.4;
+    width: 200px;
     margin-bottom: 15px;
     position: relative;
     box-shadow: 0 0 10px rgba(255, 255, 204, 0.6), 2px 2px 0px rgba(0, 0, 0, 0.2);
@@ -41,7 +45,7 @@
     content: '';
     position: absolute;
     bottom: -11px;
-    right: 20px;
+    right: calc(50% - 15px);
     border-width: 11px 11px 0 0;
     border-style: solid;
     border-color: black transparent transparent transparent;
@@ -51,7 +55,7 @@
     content: '';
     position: absolute;
     bottom: -9px;
-    right: 21px;
+    right: calc(50% - 14px);
     border-width: 10px 10px 0 0;
     border-style: solid;
     border-color: #FFFFE1 transparent transparent transparent;

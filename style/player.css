@@ -12,6 +12,60 @@
     overflow: hidden;
 }
 
+/* Tab Switcher */
+.player-tab-bar {
+    display: flex;
+    background: #c0c0c0;
+    padding: 4px 6px 0 6px;
+    border-bottom: 2px solid #808080;
+    gap: 4px;
+}
+
+.player-tab-btn {
+    background: #b0b0b0;
+    border: 2px solid;
+    border-color: #ffffff #808080 #808080 #ffffff;
+    border-bottom: none;
+    padding: 3px 8px;
+    font-family: 'Courier New', monospace;
+    font-size: 11px;
+    font-weight: bold;
+    cursor: pointer;
+    color: #333;
+    outline: none;
+}
+
+.player-tab-btn:hover {
+    background: #c8c8c8;
+}
+
+.player-tab-btn.active {
+    background: #c0c0c0;
+    border-color: #ffffff #404040 #c0c0c0 #ffffff;
+    padding-bottom: 5px;
+    margin-bottom: -2px;
+    color: #000;
+    z-index: 2;
+}
+
+.player-view {
+    width: 100%;
+}
+
+.soundcloud-frame-container {
+    padding: 6px;
+    background: #1a1a1a;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.soundcloud-frame-container iframe {
+    display: block;
+    width: 100%;
+    border: 1px inset #444;
+}
+
 /* Album art + now playing */
 .player-now-playing {
     background: #000;

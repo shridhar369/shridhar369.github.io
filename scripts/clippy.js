@@ -1,6 +1,7 @@
 const clippyLines = [
     "It looks like you're trying to view a portfolio!",
     "I can help you find the projects folder.",
+    "Trying not to go cold..",
     "Check out the 'Danger' icon... if you dare!",
     "I'm here to stay, whether you like it or not!",
     "Is it a bug, or is it a feature? I'll never tell.",
