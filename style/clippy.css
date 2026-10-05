@@ -3,49 +3,66 @@
 /* Container positioned directly over the bottom-right watermark */
 .clippy-container {
     position: fixed;
-    bottom: 45px;
-    right: 15px;
+    bottom: calc(45px + env(safe-area-inset-bottom, 0px));
+    right: calc(15px + env(safe-area-inset-right, 0px));
     display: none; /* Keep him hidden during BIOS */
     opacity: 0;
     flex-direction: column;
-    align-items: center;
-    z-index: 9999;
+    align-items: flex-end; /* Keep avatar anchored over the watermark */
+    z-index: 1000000; /* Stays above windows, taskbar, and glitch screen overlays (99999) */
     transition: opacity 1.5s ease-in-out;
+    cursor: pointer;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+    pointer-events: auto;
 }
 
-/* The Paperclip with Pulse & Glow */
+/* The Paperclip Avatar with 100% Solid Opaque Backing to completely mask watermark */
 .clippy-avatar {
-    font-size: 52px;
+    font-size: 46px;
     line-height: 1;
     user-select: none;
-    filter: drop-shadow(0 0 8px rgba(0, 255, 255, 0.8));
-    animation: clippy-pulse 2s infinite alternate;
-    transition: transform 0.2s;
-    background: radial-gradient(circle, rgba(0, 0, 0, 0.75) 45%, transparent 70%);
+    width: 64px;
+    height: 64px;
+    min-width: 64px;
+    min-height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     border-radius: 50%;
-    padding: 2px 6px;
+    /* Solid opaque background so logo underneath can never bleed through */
+    background: #000000;
+    border: 2px solid rgba(0, 255, 255, 0.75);
+    box-shadow: 0 0 14px rgba(0, 0, 0, 0.95), 0 0 10px rgba(0, 255, 255, 0.5);
+    animation: clippy-pulse 2s infinite alternate;
+    transition: transform 0.2s ease;
+    margin-right: 2px;
 }
 
 /* The Retro Yellow Speech Bubble */
 .clippy-balloon {
     background: #FFFFE1;
     border: 1px solid black;
-    padding: 12px 14px;
+    padding: 10px 14px;
     font-size: 13px;
     line-height: 1.4;
     width: 200px;
-    margin-bottom: 15px;
+    max-width: min(220px, calc(100vw - 32px));
+    margin-bottom: 12px;
     position: relative;
     box-shadow: 0 0 10px rgba(255, 255, 204, 0.6), 2px 2px 0px rgba(0, 0, 0, 0.2);
     color: black;
+    word-wrap: break-word;
+    word-break: break-word;
 }
 
-/* The Triangle Tail for that 90s look */
+/* The Triangle Tail pointing right to the avatar */
 .clippy-balloon::after {
     content: '';
     position: absolute;
     bottom: -11px;
-    right: calc(50% - 15px);
+    right: 24px;
     border-width: 11px 11px 0 0;
     border-style: solid;
     border-color: black transparent transparent transparent;
@@ -55,7 +72,7 @@
     content: '';
     position: absolute;
     bottom: -9px;
-    right: calc(50% - 14px);
+    right: 25px;
     border-width: 10px 10px 0 0;
     border-style: solid;
     border-color: #FFFFE1 transparent transparent transparent;
@@ -66,22 +83,71 @@
 @keyframes clippy-pulse {
     from {
         transform: scale(1);
-        filter: drop-shadow(0 0 3px rgba(0, 255, 255, 0.4));
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.95), 0 0 6px rgba(0, 255, 255, 0.4);
     }
-
     to {
-        transform: scale(1.1);
-        filter: drop-shadow(0 0 15px rgba(0, 255, 255, 1));
+        transform: scale(1.06);
+        box-shadow: 0 0 16px rgba(0, 0, 0, 0.95), 0 0 14px rgba(0, 255, 255, 0.9);
     }
 }
 
-@keyframes retro-shake {
+@keyframes retro-shake-balloon {
     0%, 100% { transform: translate(0, 0); }
-    25% { transform: translate(-8px, 2px); }
-    50% { transform: translate(8px, -2px); }
-    75% { transform: translate(-8px, -2px); }
+    25% { transform: translate(-6px, 2px); }
+    50% { transform: translate(6px, -2px); }
+    75% { transform: translate(-4px, -1px); }
 }
 
-.shake {
-    animation: retro-shake 0.4s ease-in-out !important;
+@keyframes retro-shake-avatar {
+    0%, 100% { transform: scale(1); }
+    25% { transform: scale(1.1) rotate(-4deg); }
+    50% { transform: scale(0.96) rotate(4deg); }
+    75% { transform: scale(1.05) rotate(-2deg); }
+}
+
+.shake .clippy-balloon {
+    animation: retro-shake-balloon 0.4s ease-in-out !important;
+}
+
+.shake .clippy-avatar {
+    animation: retro-shake-avatar 0.4s ease-in-out !important;
+}
+
+/* Responsive adjustments for mobile and smaller devices */
+@media (max-width: 600px) {
+    .clippy-container {
+        bottom: calc(44px + env(safe-area-inset-bottom, 0px));
+        right: calc(10px + env(safe-area-inset-right, 0px));
+    }
+
+    .clippy-balloon {
+        width: 180px;
+        max-width: calc(100vw - 28px);
+        font-size: 11px;
+        padding: 8px 10px;
+        margin-bottom: 10px;
+    }
+
+    .clippy-balloon::after {
+        right: 20px;
+    }
+
+    .clippy-balloon::before {
+        right: 21px;
+    }
+
+    .clippy-avatar {
+        width: 56px;
+        height: 56px;
+        min-width: 56px;
+        min-height: 56px;
+        font-size: 40px;
+    }
+}
+
+@media (max-width: 360px) {
+    .clippy-balloon {
+        width: 160px;
+        font-size: 10.5px;
+    }
 }

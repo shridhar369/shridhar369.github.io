@@ -94,6 +94,8 @@ body {
 .window {
     position: absolute;
     width: 300px;
+    max-width: calc(100vw - 20px);
+    max-height: calc(100vh - 50px);
     background-color: #c0c0c0;
     border: 2px solid;
     border-color: #ffffff #808080 #808080 #ffffff;
@@ -140,12 +142,6 @@ body {
     border-color: #808080 #ffffff #ffffff #808080;
 }
 
-#taskbar-tabs {
-    display: flex;
-    gap: 5px;
-    align-items: center;
-    height: 100%;
-}
 
 .task-tab {
     height: 28px;
@@ -245,6 +241,9 @@ body {
     flex: 1 1 auto;
     margin: 0 8px;
     align-items: center;
+    height: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
 }
 
 .shutdown-btn {
@@ -388,4 +387,28 @@ body {
     image-rendering: pixelated;
     filter: contrast(1.1) grayscale(0.2);
     /* Gives it a slight "old camera" vibe */
+}
+
+/* Responsive adjustments for mobile / other devices */
+@media (max-width: 600px) {
+    .desktop {
+        height: calc(100dvh - 40px);
+    }
+
+    .window {
+        width: calc(100vw - 20px) !important;
+        left: 10px !important;
+        max-height: calc(100dvh - 60px);
+    }
+
+    .clock {
+        width: 75px;
+        font-size: 12px;
+        padding: 4px 6px;
+    }
+
+    .shutdown-btn {
+        padding: 5px 8px;
+        font-size: 11px;
+    }
 }

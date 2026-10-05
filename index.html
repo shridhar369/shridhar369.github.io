@@ -31,7 +31,7 @@
         <div class="boot-content">
             <div id="pre-boot-msg"
                 style="display:none; color:#00ff00; font-family:'Courier New',monospace; font-size:16px; text-align:center; margin-top: 40vh; animation: blink 1s step-end infinite;">
-                _ PRESS ANY KEY TO BOOT _
+                _ PRESS ANY KEY OR TAP TO BOOT _
             </div>
             <pre id="bios-text" class="bios-text"></pre>
             <button id="boot-btn" class="boot-btn" onclick="bootSystem()" style="display:none;">
@@ -146,7 +146,6 @@
                         <li>Basics of web programming</li>
                         <li>C,C++</li>
                         <li>Cybersec And Linux fundamentals</li>
-                        </li>
                     </ul>
 
                     <p>
@@ -375,8 +374,8 @@
     </div>
 
 
-    <div id="shutdown-screen" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: black; z-index: 10000; flex-direction: column; justify-content: center; align-items: center; color: 
-#333; justify-content: center;">
+    <div id="shutdown-screen"
+        style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: black; z-index: 10000; flex-direction: column; justify-content: center; align-items: center; color: #333;">
         <button id="power-on-btn" onclick="location.reload()" style="background: none; border: 2px solid #222; border-radius: 50%; width: 80px; height: 80px; cursor: pointer; color: #444; font-size: 30px; transition: 0.3s;
      display: flex; justify-content: center; align-items: center;">
             ⏻
@@ -400,14 +399,17 @@
 
             <!-- Retro Mode Tabs -->
             <div class="player-tab-bar">
-                <button type="button" class="player-tab-btn active" id="tab-sc" onclick="switchPlayerTab('soundcloud')">☁️ SoundCloud</button>
-                <button type="button" class="player-tab-btn" id="tab-custom" onclick="switchPlayerTab('custom')">🎵 Custom Deck</button>
+                <button type="button" class="player-tab-btn active" id="tab-sc"
+                    onclick="switchPlayerTab('soundcloud')">☁️ SoundCloud</button>
+                <button type="button" class="player-tab-btn" id="tab-custom" onclick="switchPlayerTab('custom')">🎵
+                    Custom Deck</button>
             </div>
 
             <!-- TAB 1: SOUNDCLOUD (Active by default) -->
             <div id="player-soundcloud-view" class="player-view">
                 <div class="soundcloud-frame-container">
-                    <iframe id="sc-widget" width="100%" height="340" scrolling="no" frameborder="no" allow="autoplay; encrypted-media"
+                    <iframe id="sc-widget" width="100%" height="340" scrolling="no" frameborder="no"
+                        allow="autoplay; encrypted-media"
                         src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/2297300214&color=%23008080&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false">
                     </iframe>
                 </div>
@@ -463,9 +465,10 @@
     <script src="scripts/game.js"></script>
     <script src="scripts/player.js"></script>
 
+    <!-- https://infoforkannada.blogspot.com/ -->
+    <!-- https://www.instagram.com/decoding.k97?igsh=MTc3NHFrMnh6M2phcg== -->
+
 
 </body>
-<!-- https://infoforkannada.blogspot.com/ -->
-<!-- https://www.instagram.com/decoding.k97?igsh=MTc3NHFrMnh6M2phcg== -->
 
 </html>

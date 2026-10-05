@@ -199,6 +199,3 @@ body:has(#bsod[style*="display: block"])::after {
     mix-blend-mode: exclusion;
     animation: screen-tear-glitch-2 0.4s steps(1) !important;
 }
-
-
-

@@ -190,7 +190,6 @@ function updateTaskbar() {
 }
 
 
-// Add this line to your bringToFront function to highlight the tab
 function bringToFront(element) {
     zIndexCounter++;
     element.style.zIndex = zIndexCounter;
@@ -251,11 +250,8 @@ function makeDraggable(element) {
 document.querySelectorAll('.window').forEach(win => {
     makeDraggable(win);
 });
-/* --- EXISTING CODE ABOVE (Clock, Drag, Open/Close) --- */
 
-// --- NEW FUNCTIONS ---
-
-// 1. Boot System Logic
+// Boot System Logic
 function bootSystem() {
 
     document.getElementById('boot-screen').style.display = 'none';
@@ -308,21 +304,25 @@ function triggerPeriodicShake() {
         return;
     }
 
-    const bodyElem = document.body;
-    bodyElem.classList.add('periodic-shake');
+    const desktopElem = document.getElementById('main-desktop');
+    const taskbarElem = document.getElementById('taskbar');
+
+    // Shake desktop and taskbar while keeping Clippy completely stationary over the watermark
+    if (desktopElem) desktopElem.classList.add('periodic-shake');
+    if (taskbarElem) taskbarElem.classList.add('periodic-shake');
 
     setTimeout(() => {
-        bodyElem.classList.remove('periodic-shake');
+        if (desktopElem) desktopElem.classList.remove('periodic-shake');
+        if (taskbarElem) taskbarElem.classList.remove('periodic-shake');
     }, 400);
 
-    // Random interval between 6 and 9 seconds (4000ms - 9000ms)
+    // Random interval between 6 and 9 seconds
     const nextInterval = Math.floor(Math.random() * 3000) + 6000;
     periodicShakeTimer = setTimeout(triggerPeriodicShake, nextInterval);
 }
 
 function startPeriodicShake() {
     if (periodicShakeTimer) clearTimeout(periodicShakeTimer);
-    // Show first glitch tear shortly after boot (1.5s), then every 4-7 seconds
     periodicShakeTimer = setTimeout(triggerPeriodicShake, 1500);
 }
 
@@ -354,6 +354,7 @@ function showFolder(folderId) {
 }
 
 function shutDown() {
+    if (periodicShakeTimer) clearTimeout(periodicShakeTimer);
     const shutdownScreen = document.getElementById('shutdown-screen');
 
     // Optional: Add a quick "flicker" before going black
